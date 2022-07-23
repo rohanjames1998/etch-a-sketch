@@ -93,7 +93,7 @@ border-radius: 50%;
 }
 
 .slider {
-    --thumbSize: 30px;
+    --thumbSize: 37px;
     -webkit-appearance: none;
     appearance: none;
     width: 100%;
