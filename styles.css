@@ -13,9 +13,10 @@ body{
     flex-direction: column;
     height: 100vh;
     width: 100%;
+    background-color: rgb(167, 160, 160);
 }
 
-/* Header styles */
+/* HEADER STYLES */
 
 .header-cont{
     background-color: aqua;
@@ -23,8 +24,53 @@ body{
     width: 100%;
     flex: 0.1;
     text-align: center;
+    font-size: 56px;
 }
 
+/* CONTENT STYLES */
+.content-cont{
+    display: flex;
+    justify-content: center;
+    padding-top: 100px;
+    gap:250px;
+}
+/* Canvas styles */
+.canvas {
+    border: solid 5px black;
+    height: 700px;
+    width: 800px;
+}
+
+
+
+/* Color palette styles */
+.color-palette{
+    border: solid 5px black;
+    height: 600px;
+    width: 400px;
+    border-radius: 30px;
+
+    display: flex;
+    flex-direction: column;
+    align-items: center;
+    justify-content: center;
+}
+
+.color-picker-cont {
+    height: 400px;
+    width: 400px; 
+    border: solid black 5px;
+    
+    display:grid;
+    grid-template-columns: 1fr 1fr;
+    grid-template-rows: 1fr 1fr;
+
+}
+
+
+
+
+/* FOOTER STYLES */
 .footer {
     background-color: brown;
     margin-top :auto;
