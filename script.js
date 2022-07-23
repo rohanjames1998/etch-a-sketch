@@ -1,0 +1,1 @@
+// Displaying slider value in HTML
