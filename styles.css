@@ -39,10 +39,24 @@ body{
 
 /* Canvas styles */
 .canvas {
+    --divs: repeat(37, 1fr);
     border: solid 5px black;
     height: 600px;
     width: 800px;
+
+    display:grid;
+    grid-template-columns: var(--divs);
+    grid-template-rows: var(--divs);
 }
+
+.empty-div{
+border: black solid 1px;
+background-color: white;
+}
+
+/* .empty-div::after, :active{
+    background-color: rgb(36, 34, 34);
+} */
 
 
 /* Color palette styles */
@@ -79,12 +93,12 @@ body{
 }
 
 .custom-selector, .black-selector, .eraser-selector, .rainbow-selector{ /*The selector buttons*/
-
 display: block;
 height: 150px;
 width: 150px;
 border-radius: 50%;
 }
+
 
 .slider-cont{
     width: 100%;
@@ -93,7 +107,7 @@ border-radius: 50%;
 }
 
 .slider {
-    --thumbSize: 37px;
+    --thumbSize: 37px;  /* Thumb size variable*/
     -webkit-appearance: none;
     appearance: none;
     width: 100%;
