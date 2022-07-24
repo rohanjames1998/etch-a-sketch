@@ -1,3 +1,8 @@
+/* -------------------- */
+// SLIDER/CANVAS FUNCTIONS
+/* -------------------- */
+
+
 // Displaying slider value in HTML
 const slider = document.querySelector(".slider");
 
@@ -29,23 +34,32 @@ function getSliderVal(){
 
         // If divs are less than slidervalue then add divs
         if (canvas.childElementCount < sliderVal){
-        for(let i = canvas.childElementCount; i <  sliderVal; i++){
+
+            for(let i = canvas.childElementCount; i <  sliderVal; i++){
         let emptyDiv = document.createElement("div");
         emptyDiv.classList.add("empty-div");
         canvas.appendChild(emptyDiv);
         }  
     }
-    // IF divs are more than slidervalue then remove divs
+    // If divs are more than slidervalue then remove divs
     if (sliderVal < canvas.childElementCount){
         for(let j = canvas.childElementCount; j > sliderVal; j--){
             let divsToRemove = canvas.lastElementChild;
             canvas.removeChild(divsToRemove);
-            divsToRemove = canvas.lastElementChild; 
         }
     }
-
-   
    }
+
+/* -------------------- */
+// COLOR FUNCTIONS
+/* -------------------- */
+const hex = "#000";
+const emptyDiv = document.querySelectorAll(".empty-div");
+emptyDiv.forEach((item) => item.addEventListener("mouseover", () => item.style.backgroundColor = hex;
+))
+;
+
+
 
 
 
