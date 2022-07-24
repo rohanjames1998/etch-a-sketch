@@ -7,7 +7,7 @@ function getSliderVal(){
     const thumbSize = `${slider.value}px`;
      slider.style.setProperty("--thumbSize", thumbSize);
 
-     return setCanvasStyle();
+     return setCanvasStyle(), addDivs();
     }
 
     // Adding adjusts appropriate amount of rows and cols in canvas.
@@ -19,7 +19,6 @@ function getSliderVal(){
         // Adding rows and cols.
         canvas.style.setProperty( "--divs", `repeat(${sliderVal}, 1fr)`);
         
-    addDivs();
     }
 
     // Adding appropriate amount of divs inside canvas.
@@ -30,21 +29,21 @@ function getSliderVal(){
 
         // If divs are less than slidervalue then add divs
         if (canvas.childElementCount < sliderVal){
-        for(let i = canvas.childElementCount; i < sliderVal; i++){
+        for(let i = canvas.childElementCount; i <  sliderVal; i++){
         let emptyDiv = document.createElement("div");
         emptyDiv.classList.add("empty-div");
         canvas.appendChild(emptyDiv);
         }  
     }
-
-        // IF divs are more than slidervalue then remove divs
-        let divsToRemove = canvas.lastElementChild;
-        if(canvas.childElementCount > sliderVal){
-            for(let j = sliderVal; j < canvas.childElementCount; j++){
-                canvas.removeChild(divsToRemove);
-                divsToRemove = canvas.lastElementChild;
-            }
+    // IF divs are more than slidervalue then remove divs
+    if (sliderVal < canvas.childElementCount){
+        for(let j = canvas.childElementCount; j > sliderVal; j--){
+            let divsToRemove = canvas.lastElementChild;
+            canvas.removeChild(divsToRemove);
+            divsToRemove = canvas.lastElementChild; 
         }
+    }
+
    
    }
 
