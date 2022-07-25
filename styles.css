@@ -92,7 +92,13 @@ background-color: white;
     justify-content: center;
 }
 
-.custom-selector, .black-selector, .eraser-selector, .rainbow-selector{ /*The selector buttons*/
+.custom-cont{
+    background-color: black;
+    height: 150px;
+    width: 150px;
+}
+
+.rainbow, .black, .eraser{ /*The selector buttons*/
 display: block;
 height: 150px;
 width: 150px;
