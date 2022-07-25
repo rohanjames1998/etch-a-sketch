@@ -55,11 +55,11 @@ function addDivs() {
 let hex ="#000"; /* this value can be dynamically changed using buttons in color palette. */
 // This function applies the specified pen color (hex variable) to canvas when user interacts with it.
 let mouseDown = false;
-function canvasColorInput() {
-    // Making use user clicks and drags to paint.
-  document.querySelector(".canvas").addEventListener("mousedown", () => mouseDown = true);
-  document.querySelector(".canvas").addEventListener("mouseup", () => mouseDown = false);
+document.addEventListener("mousedown", () => mouseDown = true);
+document.addEventListener("mouseup", () => mouseDown = false);
 
+ // Making use user clicks and drags to paint.
+function canvasColorInput() {
     // const emptyDiv = document.querySelectorAll(".empty-div");
     // emptyDiv.forEach((item) =>
     //   item.addEventListener(
@@ -72,7 +72,7 @@ function canvasColorInput() {
     document.addEventListener("mouseover", e => {
       if(e.target.matches(".empty-div")){
         if (mouseDown == true){
-          e.target.style.backgroundColor = hex
+          e.target.style.backgroundColor = hex;
         }
       }
     } )
@@ -80,11 +80,7 @@ function canvasColorInput() {
   }
 
 
-// Color picker button function below:
 
-const allSelectors = document.querySelectorAll(".selector");
-
-allSelectors.forEach((item) => item.addEventListener("click", () => hex = item.value));
 
 // This is for when user selects a different color using custom color picker.
  const customBtn = document.querySelector(".custom");
@@ -104,11 +100,21 @@ let indigo = "#4B0082";
 let violet = "#EE82EE";
 
 const rainbowArr = [red, orange, yellow, green, blue, indigo, violet];
-
- 
-    hex = rainbowArr[i];
-
+let i = 0;
+document.addEventListener("mouseover", e => {
+  if(e.target.matches(".empty-div")){
+    if (mouseDown == true){
+      e.target.style.backgroundColor = rainbowArr[i];
+      i++;
+    }
+    if(i == 7){ // Resetting rainbow colors when we reach violet
+      i = 0;
+    }
+  }
+} )
 }
+
+
 
 
 
