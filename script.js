@@ -54,20 +54,29 @@ function addDivs() {
 
 let hex ="#000"; /* this value can be dynamically changed using buttons in color palette. */
 // This function applies the specified pen color (hex variable) to canvas when user interacts with it.
+let mouseDown = false;
 function canvasColorInput() {
     // Making use user clicks and drags to paint.
-  let mouseDown = false;
   document.querySelector(".canvas").addEventListener("mousedown", () => mouseDown = true);
   document.querySelector(".canvas").addEventListener("mouseup", () => mouseDown = false);
 
-    const emptyDiv = document.querySelectorAll(".empty-div");
-    emptyDiv.forEach((item) =>
-      item.addEventListener(
-        "mouseover", () => { if (mouseDown === true){
-            item.style.backgroundColor = hex}
+    // const emptyDiv = document.querySelectorAll(".empty-div");
+    // emptyDiv.forEach((item) =>
+    //   item.addEventListener(
+    //     "mouseover", () => { if (mouseDown === true){
+    //         item.style.backgroundColor = hex}
+    //     }
+    //   )
+    // );
+
+    document.addEventListener("mouseover", e => {
+      if(e.target.matches(".empty-div")){
+        if (mouseDown == true){
+          e.target.style.backgroundColor = hex
         }
-      )
-    );
+      }
+    } )
+    
   }
 
 
@@ -78,8 +87,31 @@ const allSelectors = document.querySelectorAll(".selector");
 allSelectors.forEach((item) => item.addEventListener("click", () => hex = item.value));
 
 // This is for when user selects a different color using custom color picker.
- const custombtn = document.querySelector(".custom");
-custombtn.addEventListener("input", () => hex = custombtn.value)
+ const customBtn = document.querySelector(".custom");
+  customBtn.addEventListener("input", () => hex = customBtn.value);
+
+// Generating rainbow colors
+const  rainbowBtn = document.querySelector(".rainbow");
+rainbowBtn.addEventListener("click", () => rainbowGen());
+
+function rainbowGen() {
+let red = "#FF0000";
+let orange = "#FFA500";
+let yellow = "#FFFF00";
+let green = "#008000";
+let blue = "#0000FF";
+let indigo = "#4B0082";
+let violet = "#EE82EE";
+
+const rainbowArr = [red, orange, yellow, green, blue, indigo, violet];
+
+ 
+    hex = rainbowArr[i];
+
+}
+
+
+
 
 
 
