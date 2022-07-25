@@ -73,7 +73,16 @@ function canvasColorInput() {
 
 // Color picker button function below:
 
-allSelectors = document.querySelectorAll(".selector");
+const allSelectors = document.querySelectorAll(".selector");
 
 allSelectors.forEach((item) => item.addEventListener("click", () => hex = item.value));
+
+// This is for when user selects a different color using custom color picker.
+ const custombtn = document.querySelector(".custom");
+custombtn.addEventListener("input", () => hex = custombtn.value)
+
+
+
+
+
 canvasColorInput();
