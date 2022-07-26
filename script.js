@@ -89,13 +89,6 @@ document.addEventListener("click", (e) => {
  const eraserBtn = document.querySelector(".eraser");
  const rainbowBtn = document.querySelector(".rainbow");
 
-//  CUSTOM BUTTON
-  customBtn.addEventListener("input", () => {
-    hex = customBtn.value;
-  });
-
-
-
 
   //RAINBOW BUTTON
 rainbowBtn.addEventListener("click", () => rainbowGen());
@@ -148,12 +141,37 @@ customBtn.addEventListener("click", () => {
 // BLACK BUTTON
 blackBtn.addEventListener("click", () =>{
   hex = blackBtn.value;
+  // click and drag listener
+  canvas.addEventListener("mousedown", (e) => {
+    if (e.target.matches(".empty-div")){
+      e.target.style.backgroundColor = hex;
+      mouseDown = true;
+    }
+  })
 });
  
 // ERASER BUTTON
 eraserBtn.addEventListener("click", () => {
   hex = eraserBtn.value;
-})
+  // click and drag listener
+  canvas.addEventListener("mousedown", (e) => {
+    if (e.target.matches(".empty-div")){
+      e.target.style.backgroundColor = hex;
+      mouseDown = true;
+    }
+  })
+});
+
+//  CUSTOM BUTTON
+customBtn.addEventListener("input", () => {
+  hex = customBtn.value;
+  canvas.addEventListener("mousedown", (e) => {
+    if (e.target.matches(".empty-div")){
+      e.target.style.backgroundColor = hex;
+      mouseDown = true;
+    }
+  })
+});
 
 
 
