@@ -174,10 +174,15 @@ customBtn.addEventListener("input", () => {
   })
 });
 
+/*------------------------*/
+// CLEAR BUTTON 
+/*------------------------*/
 
-
-
-
+const clearBtn = document.querySelector(".clear-button");
+clearBtn.addEventListener("click", () => {
+  let allDivs = document.querySelectorAll(".empty-div");
+allDivs.forEach(item => item.style.backgroundColor = "#fff");
+})
 
 
 
