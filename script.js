@@ -145,7 +145,7 @@ blackBtn.addEventListener("click", () =>{
 })
  
 // ERASER BUTTON
-eraserBtn.addEventListener("click()", () => {
+eraserBtn.addEventListener("click", () => {
   hex = eraserBtn.value;
 })
 
