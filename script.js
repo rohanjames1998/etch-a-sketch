@@ -95,7 +95,8 @@ rainbowBtn.addEventListener("click", () => rainbowGen());
 
 // This function triggers when you click rainbow function and makes pen draw rainbow colors on the canvas
 function rainbowGen() {
-const rainbowArr = ["#FF0000", "#FFA500", "#FFFF00", "#008000", "#0000FF", "#4B0082",  "#EE82EE"];
+  const rainbowArr = ["#EE82EE", "#4B0082", "#0000FF", "#008000", "#FFFF00", "#FFA500", "#FF0000" ];
+
 // Function for mousedown and drag
  canvas.addEventListener("mouseover", rainbowColors);
  let i = 1; // Have to declare i outside so that it doesn't get changed every time user hovers a new div.
