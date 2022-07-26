@@ -4,7 +4,6 @@
 
 
 
-
 // Displaying slider value in HTML
 const slider = document.querySelector(".slider");
 const canvas = document.querySelector(".canvas");
@@ -12,38 +11,35 @@ const canvas = document.querySelector(".canvas");
 function getSliderVal() {
   const gridSize = document.querySelector(".grid-size");
   gridSize.textContent = `${slider.value} x ${slider.value}`;
-  const thumbSize = `${slider.value}px`;
+  const thumbSize = `${slider.value}px`; 
   slider.style.setProperty("--thumbSize", thumbSize);
 
   return setCanvasStyle(), addDivs()
 }
 
-// Adding adjusts appropriate amount of rows and cols in canvas.
-
+// For slider to add new rows and columns in our canvas.
 function setCanvasStyle() {
   const sliderVal = slider.value;
-
-  // Adding rows and cols.
   canvas.style.setProperty("--divs", `repeat(${sliderVal}, 1fr)`);
 }
 
-// Adding appropriate amount of divs inside canvas.
 
+// Adding appropriate amount of divs inside canvas.
 function addDivs() {
-  const sliderVal = slider.value * slider.value;
+  const sliderValSquared = slider.value * slider.value;
   const canvas = document.querySelector(".canvas");
 
-  // If divs are less than slidervalue then add divs
-  if (canvas.childElementCount < sliderVal) {
-    for (let i = canvas.childElementCount; i < sliderVal; i++) {
+  // If divs are less than slider value then add divs
+  if (canvas.childElementCount < sliderValSquared) {
+    for (let i = canvas.childElementCount; i < sliderValSquared; i++) {
       let emptyDiv = document.createElement("div");
       emptyDiv.classList.add("empty-div");
       canvas.appendChild(emptyDiv);
     }
   }
   // If divs are more than slidervalue then remove divs
-  if (sliderVal < canvas.childElementCount) {
-    for (let j = canvas.childElementCount; j > sliderVal; j--) {
+  if (sliderValSquared < canvas.childElementCount) {
+    for (let j = canvas.childElementCount; j > sliderValSquared; j--) {
       let divsToRemove = canvas.lastElementChild;
       canvas.removeChild(divsToRemove);
     }
@@ -63,14 +59,17 @@ function addDivs() {
 
 let hex ="#000"; /* this value can be dynamically changed using buttons in color palette. */
 // This function applies the specified pen color (hex variable) to canvas when user interacts with it.
-let mouseDown = false;
-let isRainbowOn = false;
+let mouseDown = false;  
 document.addEventListener("mousedown", () => mouseDown = true);
 document.addEventListener("mouseup", () => mouseDown = false);
+// Making sure that click also adds color
+document.addEventListener("click", (e) => { 
+  if(e.target.matches(".empty-div")){
+    e.target.style.backgroundColor = hex;
+  }
+})
 
  // Making use user clicks and drags to paint.
-
-
   document.addEventListener("mouseover", function colorDiv(e){
       if(e.target.matches(".empty-div")){
         if (mouseDown == true){
@@ -84,7 +83,7 @@ document.addEventListener("mouseup", () => mouseDown = false);
 
 
 
-// This is for when user selects a different color using custom color picker.
+// Adding listeners to each button.
  const customBtn = document.querySelector(".custom");
  const blackBtn = document.querySelector(".black");
  const eraserBtn = document.querySelector(".eraser");
@@ -103,22 +102,11 @@ rainbowBtn.addEventListener("click", () => rainbowGen());
 
 // This function triggers when you click rainbow function and makes pen draw rainbow colors on the canvas
 function rainbowGen() {
-let red = "#FF0000";
-let orange = "#FFA500";
-let yellow = "#FFFF00";
-let green = "#008000";
-let blue = "#0000FF";
-let indigo = "#4B0082";
-let violet = "#EE82EE";
-const rainbowArr = [red, orange, yellow, green, blue, indigo, violet];
-
-//Checking if user is clicking and dragging on the canvas. If so we add rainbow color from rainbowArr to the background of the clicked div.
-isRainbowOn = true;
+const rainbowArr = ["#FF0000", "#FFA500", "#FFFF00", "#008000", "#0000FF", "#4B0082",  "#EE82EE"];
+// Function for mousedown and drag
  canvas.addEventListener("mouseover", rainbowColors);
-
- let i = 0;
-  function rainbowColors(e){
-
+ let i = 1; // Have to declare i outside so that it doesn't get changed every time user hovers a new div.
+ function rainbowColors(e){
   if(e.target.matches(".empty-div")){
     if (mouseDown == true){
       // To add new rainbow color each time we use variable i.
@@ -126,15 +114,33 @@ isRainbowOn = true;
       e.target.style.backgroundColor = hex;
       i++;
     } 
-    if(i == 7){ // Resetting rainbow colors when we reach violet
+    if (i == 7){ // Resetting rainbow colors when we reach violet
       i = 0;
-    }
+    } 
   }
-  
 }
-blackBtn.addEventListener("click", () => canvas.removeEventListener("mouseover", rainbowColors));
-eraserBtn.addEventListener("click", () => canvas.removeEventListener("mouseover", rainbowColors));
-customBtn.addEventListener("click", () => canvas.removeEventListener("mouseover", rainbowColors));
+
+// Function for click
+canvas.addEventListener("mousedown", clickRainbow);
+function clickRainbow(e){
+  if(e.target.matches(".empty-div")){
+    e.target.style.backgroundColor =  rainbowArr[0];
+    hex = rainbowArr[0];
+    mouseDown = true; // For drag feature to work after clicking.
+    i = 1; // making sure every time user clicks it produces new rainbow pattern.
+  }
+}
+
+// Making other buttons remove the event listener installed by rainbowGen function.
+blackBtn.addEventListener("click", () => {
+  canvas.removeEventListener("mouseover", rainbowColors);
+  canvas.removeEventListener("mousedown", clickRainbow)});
+eraserBtn.addEventListener("click", () => {
+  canvas.removeEventListener("mouseover", rainbowColors);
+  canvas.removeEventListener("mousedown", clickRainbow)});
+customBtn.addEventListener("click", () => {
+  canvas.removeEventListener("mouseover", rainbowColors);
+  canvas.removeEventListener("mousedown", clickRainbow)});
 }
 
 
@@ -142,7 +148,7 @@ customBtn.addEventListener("click", () => canvas.removeEventListener("mouseover"
 // BLACK BUTTON
 blackBtn.addEventListener("click", () =>{
   hex = blackBtn.value;
-})
+});
  
 // ERASER BUTTON
 eraserBtn.addEventListener("click", () => {
